@@ -1,6 +1,6 @@
 **README - Loterie EtherBay Page Web**<br>
 
-Ce document fournit une brève explication du code HTML, CSS, et JavaScript qui constitue la page web "Loterie EtherBay".
+Ce document fournit une brève explication du code HTML, CSS, et JavaScript qui constitue la page web "Loterie EtherBay".<br>
 Contenu du Code<br>
 		**HTML (index.html):**
 Déclaration du type de document et de la langue.
