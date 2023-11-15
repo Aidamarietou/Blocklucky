@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acheter des Tickets - Blocklucky</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #333;
+        }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #3498db;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: light;
+        }
+
+        input, button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+
+        .fixed-width {
+            max-width: 200px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-sizing: border-box;
+            font-size: 14px;
+            width: auto;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blocklucky</h1>
+    </header>
+
+    <div class="container">
+        <h2>Acheter des Tickets</h2>
+
+        <div>
+            <p>Numéro de Wallet du Vendeur: <span id="walletVendeur">12345</span></p>
+        </div>
+
+        <div>
+            <label for="numeroWallet">Votre Numéro de Wallet (5 chiffres):</label>
+            <input type="text" id="numeroWallet" maxlength="5" class="fixed-width" placeholder="Entrez votre numéro de wallet">
+            <button onclick="acheterTicket()">Acheter</button>
+            <p id="messageErreur" class="error-message"></p>
+        </div>
+
+        <!-- Lien vers la page de consultation -->
+        <a href="consultation.html" class="cta-button" onclick="afficherTickets()">Consulter Mes Tickets</a>
+    </div>
+
+    <script>
+        // Au chargement de la page, essayons de récupérer les tickets depuis le stockage local
+        var ticketsAchetes = JSON.parse(localStorage.getItem('ticketsAchetes')) || [];
+
+        function acheterTicket() {
+            var inputNumeroWallet = document.getElementById('numeroWallet');
+            var messageErreur = document.getElementById('messageErreur');
+
+            if (inputNumeroWallet.value.length !== 5 || isNaN(inputNumeroWallet.value)) {
+                messageErreur.textContent = 'Veuillez entrer une série de 5 chiffres.';
+            } else {
+                var nouveauTicket = {
+                    numeroWallet: inputNumeroWallet.value,
+                    numeroTicket: generateTicketNumber()
+                };
+
+                ticketsAchetes.push(nouveauTicket);
+
+                // Stockons les tickets dans le stockage local
+                localStorage.setItem('ticketsAchetes', JSON.stringify(ticketsAchetes));
+
+                messageErreur.textContent = 'Achat effectué avec succès! Numéro du Ticket : ' + nouveauTicket.numeroTicket;
+            }
+        }
+
+        function afficherTickets() {
+            // Redirection vers la page de consultation
+            window.location.href = "consultation.html";
+        }
+
+        function generateTicketNumber() {
+            return Math.floor(Math.random() * 1000) + 1;
+        }
+    </script>
+</body>
+</html>
