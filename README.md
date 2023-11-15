@@ -1,4 +1,5 @@
-**README - Loterie EtherBay Page Web**
+**README - Loterie EtherBay Page Web**<br>
+
 Ce document fournit une brève explication du code HTML, CSS, et JavaScript qui constitue la page web "Loterie EtherBay".
 Contenu du Code<br>
 		**HTML (index.html):**
